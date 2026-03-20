@@ -1,7 +1,7 @@
 package com.springboot.basics.learn_springboot.service;
 import java.util.*;
 
-import org.jspecify.annotations.Nullable;
+
 
 import com.springboot.basics.learn_springboot.dto.AddStudentDto;
 import com.springboot.basics.learn_springboot.dto.StudentDto;
@@ -13,4 +13,6 @@ public interface StudentService {
     void deleteStudent(int studentId);
    
   StudentDto updateStudent(int studentId, AddStudentDto addStudentDto);
+ 
+  StudentDto partialUpdateStudent(int studentId, Map<String,Object> updates);
 }

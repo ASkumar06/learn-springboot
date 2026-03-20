@@ -12,6 +12,7 @@ import com.springboot.basics.learn_springboot.dto.StudentDto;
 
 import com.springboot.basics.learn_springboot.service.StudentService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 
@@ -38,7 +39,7 @@ public class StudentController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<StudentDto> createStudent(@RequestBody AddStudentDto addStudentDto){
+    public ResponseEntity<StudentDto> createStudent(@RequestBody @Valid AddStudentDto addStudentDto){
         return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(addStudentDto));
     }
 
@@ -53,5 +54,12 @@ public class StudentController {
         StudentDto updatedStudent= studentService.updateStudent(studentId, addStudentDto);
         return ResponseEntity.ok(updatedStudent);
     }
+
+    @PatchMapping("/update/{studentId}")
+    public ResponseEntity<StudentDto> partialUpdateStudent(@PathVariable int studentId,
+        @RequestBody Map<String,Object> updates){
+            return ResponseEntity.ok(studentService.partialUpdateStudent(studentId,updates));
+        }
+    
     
 }
